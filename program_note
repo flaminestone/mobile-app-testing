@@ -1,0 +1,1 @@
+adb pull $(adb shell uiautomator dump | grep -oP '[^ ]+.xml') /tmp/view.xml && google-chrome /tmp/view.xml

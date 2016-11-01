@@ -22,7 +22,7 @@ for i in `seq 1 40`; # delete 30 symbols from field
 	do
 		$adb shell input keyevent KEYCODE_DEL
 	done    
-$adb shell input text 'teamlab.ruby@gmail.com' #add new portal email
+$adb shell input text 'john.dorian@tm-runner.no-ip.org' #add new portal email
 
 $adb shell input tap 100 845 # click on portal password field
 $adb shell input keyevent 111 #hide keybord
