@@ -1,10 +1,6 @@
-
+require 'nokogiri'
 class AndroidXmlParser
-  def initialize(path)
-    parse(path)
-  end
-
   def parse(path)
-
+    Nokogiri::HTML(open(path))
   end
 end
