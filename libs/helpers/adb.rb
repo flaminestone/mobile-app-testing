@@ -8,5 +8,9 @@ class Adb
     def get_state(id)
       `adb -s #{id} get-state 2<&1`
     end
+
+    def get_wlan_data(id)
+      `adb -s #{id} shell ip -f inet addr show wlan0`
+    end
   end
 end
