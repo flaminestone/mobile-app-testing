@@ -1,1 +1,4 @@
 adb pull $(adb shell uiautomator dump | grep -oP '[^ ]+.xml') /tmp/view.xml && google-chrome /tmp/view.xml
+adb shell ip -f inet addr show wlan0
+172.50.0.14
+adb connect 172.50.0.14:5555
