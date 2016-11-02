@@ -30,5 +30,9 @@ class AdbHelper
         devise
       end
     end
+
+    def get_wifi_ip(device)
+      Adb.get_wlan_data(device.serial_number)[/(inet )[0-9.]+/].delete('inet ')
+     end
   end
 end
