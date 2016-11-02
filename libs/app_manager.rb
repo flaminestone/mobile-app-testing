@@ -1,3 +1,3 @@
-require_relative '../libs/android/android_xml_parser'
+require_relative '../libs/android/android_parser'
 class AppManager
 end
