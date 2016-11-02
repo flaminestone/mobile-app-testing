@@ -10,7 +10,11 @@ class Adb
     end
 
     def get_wlan_data(id)
-      `adb -s #{id} shell ip -f inet addr show wlan0`
+      `adb -s #{id} shell ip -f inet addr show wlan0 2<&1`
+    end
+
+    def connect(id, ip)
+      `adb -s #{id} connect #{ip}`
     end
   end
 end
