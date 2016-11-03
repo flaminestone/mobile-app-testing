@@ -16,5 +16,13 @@ class Adb
     def connect(id, ip)
       `adb -s #{id} connect #{ip}`
     end
+
+    def disconnect(id)
+      `adb -s disconnect #{id}`
+    end
+
+    def disconnect_all
+      `adb disconnect`
+    end
   end
 end

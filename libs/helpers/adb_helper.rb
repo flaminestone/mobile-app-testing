@@ -3,7 +3,7 @@ require_relative '../../libs/helpers/adb'
 require_relative '../../libs/helpers/device'
 class AdbHelper
   class << self
-    #get serial number  for all devices
+    # get serial number  for all devices
     def get_devises_id
       Adb.get_devises.scan(/^\w*\t/).map { |i| i.delete("\t") }
     end
@@ -13,12 +13,14 @@ class AdbHelper
     # return :offline (cant find device), :loading (device is booting) or :online (ready to work)
     def get_status(id)
       case Adb.get_state(id).chomp
-        when 'offline'
-          return :offline
-        when 'bootloader'
-          :loading
-        when 'device'
-          :online
+      when 'offline'
+        :offline
+      when 'bootloader'
+        :loading
+      when 'device'
+        :online
+      else
+        :none
       end
     end
 
@@ -37,14 +39,23 @@ class AdbHelper
     end
 
     # Connect adb to device by wifi(shell method)
-    def connect(device, ip)
-      Adb.connect(ip, device.serial_number)
+    def connect(device)
+      Adb.connect(device.serial_number, device.ip)
+    end
+
+    def disconnect(device)
+      Adb.disconnect(device.serial_number)
+    end
+
+    def disconnect_all
+      Adb.disconnect_all
     end
 
     # Connect adb to device by wifi
     def checkout_to_wifi(device)
       ip = get_wifi_ip(device)
-      connect(device, ip)
+      device.ip = ip
+      connect(device)
     end
   end
 end
