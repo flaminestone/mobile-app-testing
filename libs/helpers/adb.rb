@@ -14,15 +14,15 @@ class Adb
     end
 
     def connect(id, ip)
-      `adb -s #{id} connect #{ip}`
+      `adb -s #{id} connect #{ip} 2<&1`
     end
 
     def disconnect(id)
-      `adb -s disconnect #{id}`
+      `adb -s disconnect #{id} 2<&1`
     end
 
     def disconnect_all
-      `adb disconnect`
+      `adb disconnect 2<&1`
     end
   end
 end
