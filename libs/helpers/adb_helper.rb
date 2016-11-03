@@ -34,15 +34,19 @@ class AdbHelper
     end
 
     # get ip address by device
+    # @param device [Device] is a object os Device class
     def get_wifi_ip(device)
       Adb.get_wlan_data(device.serial_number)[/(inet )[0-9.]+/].delete('inet ')
     end
 
     # Connect adb to device by wifi(shell method)
+    # @param device [Device] is a object os Device class
     def connect(device)
       Adb.connect(device.serial_number, device.ip)
     end
 
+    # Disconnect adb to device
+    # @param device [Device] is a object os Device class
     def disconnect(device)
       Adb.disconnect(device.serial_number)
     end
@@ -52,6 +56,7 @@ class AdbHelper
     end
 
     # Connect adb to device by wifi
+    # @param device [Device] is a object os Device class
     def checkout_to_wifi(device)
       ip = get_wifi_ip(device)
       device.ip = ip
