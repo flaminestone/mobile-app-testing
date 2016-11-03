@@ -18,11 +18,16 @@ class Adb
     end
 
     def disconnect(id)
-      `adb -s disconnect #{id} 2<&1`
+      `adb disconnect #{id} 2<&1`
     end
 
     def disconnect_all
       `adb disconnect 2<&1`
+    end
+
+    def set_port(id, port = '5555')
+      `adb -s #{id} tcpip #{port} 2<&1`
+      sleep 3 # need to reboot tcp
     end
   end
 end
