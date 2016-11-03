@@ -42,7 +42,13 @@ class AdbHelper
     # Connect adb to device by wifi(shell method)
     # @param device [Device] is a object os Device class
     def connect(device)
-      Adb.connect(device.serial_number, device.ip)
+      result = Adb.connect(device.serial_number, device.ip).split(' ').first
+      if result == 'unable'
+        device.status = :offline
+      else
+        device.status = :online
+      end
+      device
     end
 
     # Disconnect adb to device

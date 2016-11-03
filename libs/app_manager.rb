@@ -7,7 +7,7 @@ class AppManager
   def self.initial_devices_by_config(configure = 'configure.json')
     str = File.open(configure, &:read)
     devices = DeviceHelper.create_devices_by_config(JSON.parse(str))
-    devices.each do |current_device|
+    devices.map do |current_device|
       AdbHelper.connect(current_device)
     end
   end

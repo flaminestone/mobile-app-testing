@@ -2,3 +2,9 @@ adb pull $(adb shell uiautomator dump | grep -oP '[^ ]+.xml') /tmp/view.xml && g
 adb shell ip -f inet addr show wlan0
 172.50.0.14
 adb connect 172.50.0.14:5555
+adb tcpip 5555
+
+connected to 172.50.0.14:5555
+unable to connect to 172.50.0.4:5555
+already connected to 172.50.0.14:5555
+

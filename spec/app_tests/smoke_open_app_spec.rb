@@ -7,9 +7,10 @@ describe 'open application tests' do
   end
 
   it 'open app' do
+    expect(true).to be_truthy
   end
 
-  after :all
-    AppManager.disconnect_all do
+  after :all do
+    AppManager.disconnect_all
   end
 end
