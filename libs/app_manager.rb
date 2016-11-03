@@ -1,7 +1,7 @@
 require_relative '../libs/android/android_parser'
-require_relative '../libs/helpers/adb_helper'
-require_relative '../libs/helpers/device'
-require_relative '../libs/helpers/device_helper'
+require_relative '../libs/helpers/adb/adb_helper'
+require_relative '../libs/helpers/device/device'
+require_relative '../libs/helpers/device/device_helper'
 require 'json'
 class AppManager
   def self.initial_devices_by_config(configure = 'configure.json')

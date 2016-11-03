@@ -1,6 +1,6 @@
 # class has methods for use adb utylit. Need to connect android devise for use
-require_relative '../../libs/helpers/adb'
-require_relative '../../libs/helpers/device'
+require_relative '../../../libs/helpers/adb/adb'
+require_relative '../../../libs/helpers/device/device'
 class AdbHelper
   class << self
     # get serial number  for all devices

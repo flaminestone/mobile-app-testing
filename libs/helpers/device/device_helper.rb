@@ -1,5 +1,5 @@
-require_relative '../../libs/helpers/device'
-require_relative '../../libs/helpers/adb_helper'
+require_relative '../../../libs/helpers/device/device'
+require_relative '../../../libs/helpers/adb/adb_helper'
 class DeviceHelper
   def self.create_devices_by_config(data)
     data.map do |current_data|
