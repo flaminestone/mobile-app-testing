@@ -29,5 +29,9 @@ class Adb
       `adb -s #{id} tcpip #{port} 2<&1`
       sleep 3 # need to reboot tcp
     end
+
+    def shell_start_by_ip(ip, command, key = 'a')
+      `adb -s #{ip} shell am start -#{key} #{command} 2<&1`
+    end
   end
 end

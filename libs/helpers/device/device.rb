@@ -1,5 +1,8 @@
 # this class is abstraction for device.
+require_relative '../../../libs/helpers/adb/adb_helper'
+require_relative '../../../libs/helpers/device/device_actions'
 class Device
+  include DeviceActions
   attr_accessor :serial_number, :status, :name, :ip
 
   def initialize(*args)

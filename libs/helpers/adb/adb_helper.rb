@@ -42,6 +42,7 @@ class AdbHelper
     # Connect adb to device by wifi(shell method)
     # @param device [Device] is a object os Device class
     def connect(device)
+      sleep 0.5
       result = Adb.connect(device.serial_number, device.ip).split(' ').first
       if result == 'unable'
         device.status = :offline
@@ -57,6 +58,7 @@ class AdbHelper
       Adb.disconnect(device.serial_number)
     end
 
+    # disconnect all devices
     def disconnect_all
       Adb.disconnect_all
     end
@@ -68,6 +70,16 @@ class AdbHelper
       ip = get_wifi_ip(device)
       device.ip = ip
       connect(device)
+    end
+
+    # ---------------------------------------------------------------------------------------------
+    # Methods for device used
+
+    # @param ip [String]
+    # @params command [String] like this: 'android.intent.action.VIEW -d "market://details?id=com.onlyoffice.documents"'
+    # @params key [String] is a key for start command. Use 'n' if you run MainActivity
+    def run_command_on_device(ip, command, key = nil)
+      Adb.shell_start_by_ip(ip, command, key)
     end
   end
 end
