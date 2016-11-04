@@ -34,8 +34,12 @@ class Adb
       `adb -s #{ip} shell am start -#{key} #{command} 2<&1`
     end
 
-    def pull(pull_from, pull_to)
+    def pull(ip, pull_from, pull_to)
       `adb -s #{ip} pull #{pull_from} #{pull_to} 2<&1`
+    end
+
+    def dump(ip, save_to)
+    `adb -s #{ip} pull $(adb -s #{ip}  shell uiautomator dump | grep -oP '[^ ]+.xml') #{save_to}.xml 2<&1`
     end
   end
 end

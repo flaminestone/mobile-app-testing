@@ -1,6 +1,7 @@
 # class has methods for use adb utylit. Need to connect android devise for use
 require_relative '../../../libs/helpers/adb/adb'
 require_relative '../../../libs/helpers/device/device'
+require 'tempfile'
 class AdbHelper
   class << self
     # get serial number  for all devices
@@ -80,6 +81,19 @@ class AdbHelper
     # @params key [String] is a key for start command. Use 'n' if you run MainActivity
     def run_command_on_device(ip, command, key = nil)
       Adb.shell_start_by_ip(ip, command, key)
+    end
+
+    # @param pull_from [String] is a path to file to pull on device
+    def pull(ip, pull_from)
+      output_file = Tempfile.new(File.basename(pull_from))
+      Adb.pull(ip, pull_from, output_file.path)
+      output_file
+    end
+
+    def get_dump(ip, path)
+      output_file = Tempfile.new(File.basename(path))
+      Adb.dump(ip, output_file.path)
+      output_file
     end
   end
 end
