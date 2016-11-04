@@ -33,5 +33,9 @@ class Adb
     def shell_start_by_ip(ip, command, key = 'a')
       `adb -s #{ip} shell am start -#{key} #{command} 2<&1`
     end
+
+    def pull(pull_from, pull_to)
+      `adb -s #{ip} pull #{pull_from} #{pull_to} 2<&1`
+    end
   end
 end
