@@ -90,6 +90,8 @@ class AdbHelper
       output_file
     end
 
+    # @param ip [String] is a ip for device
+    # @param path [String] is a path for xml save
     def get_dump(ip, path)
       output_file = Tempfile.new(File.basename(path))
       Adb.dump(ip, output_file.path)
