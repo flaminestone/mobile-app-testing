@@ -5,8 +5,11 @@ module DeviceActions
   # @params app_name [Symbol].
   # there are list of valit application name:
   # :google_play
+  # :onlyoffice
    def run_app(app_name)
      AdbHelper.run_command_on_device(@ip, AppRequests::APP[app_name][:command], 'n')
+     sleep 3 # no app to open it moment, need to sleep
+     get_dump('install_app_from_google_play')
    end
 
    # @param link [String] is a link to application in google play market

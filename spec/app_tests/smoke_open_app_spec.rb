@@ -1,12 +1,15 @@
 require 'rspec'
 require_relative '../../libs/app_manager'
 
+devices = nil
 describe 'open application tests' do
   before :all do
-    AppManager.initial_devices_by_config
+    devices = AppManager.initial_devices_by_config
   end
 
-  it 'open app' do
+
+  it 'open app :onlyoffice' do
+    object = devices[1].run_app :onlyoffice
     expect(true).to be_truthy
   end
 
