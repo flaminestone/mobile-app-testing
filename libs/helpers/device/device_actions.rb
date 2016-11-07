@@ -24,13 +24,17 @@ module DeviceActions
    # @param filepath [String] is a path to file on device
   def pull(filepath)
     AdbHelper.pull(@ip, filepath)
-  end
+    end
 
+   # get dump of interface like xml
+   # @param filepath [String] is a path for save dump file
    def get_dump(filepath)
     path_to_file = AdbHelper.get_dump(@ip, filepath)
     parse_android_xml(path_to_file)
    end
 
+   # Parse xml interface file
+   # @param path [String] is a path to dump file
   def parse_android_xml(path)
     AndroidParser.parse(path)
   end
