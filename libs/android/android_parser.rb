@@ -2,12 +2,13 @@ require_relative '../../libs/android/android_page_structure/common_parser/common
 require_relative '../../libs/android/android_page_structure/Page'
 module AndroidParser
   class AndroidPageStructure < AndroidPageObject
-    attr_accessor :page
+    attr_accessor :page, :structure
     def parse(path)
       raise "File #{path} is not found" unless File.exist?(path)
       xmlobj = Nokogiri::XML(open("#{path}.xml"))
       set_common_data(xmlobj)
       @page = Page.new(xmlobj)
+      @structure = detect_page(xmlobj)
       self
     end
   end
