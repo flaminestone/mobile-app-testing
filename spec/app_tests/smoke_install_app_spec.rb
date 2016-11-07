@@ -8,6 +8,7 @@ describe 'install application tests' do
   end
 
   it 'Install from google play' do
+    object = devices[1].install_app_from_google_play 'market://details?id=com.onlyoffice.documents'
     expect(true).to be_truthy
   end
 
