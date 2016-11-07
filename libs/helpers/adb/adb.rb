@@ -41,5 +41,9 @@ class Adb
     def dump(ip, save_to)
     `adb -s #{ip} pull $(adb -s #{ip}  shell uiautomator dump | grep -oP '[^ ]+.xml') #{save_to}.xml 2<&1`
     end
+
+    def click(ip, x, y)
+      `adb -s #{ip} shell input tap #{x} #{y}`
+    end
   end
 end
