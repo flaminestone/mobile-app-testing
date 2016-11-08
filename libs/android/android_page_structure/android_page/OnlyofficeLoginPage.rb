@@ -3,7 +3,7 @@ require_relative '../../../../libs/android/android_page_structure/common_parser/
 require_relative '../../../../libs/android/android_page_structure/common_parser/common_data/Element'
 class OnlyofficeLoginPage
 
-  attr_accessor :portal_address_field, :email_field
+  attr_accessor :portal_address_field, :email_field, :password_field, :login_button
   def initialize(xml)
     @portal_address_field = Element.new(:coordinats => get_portal_address_field(xml))
     @email_field = Element.new(:coordinats => get_email_field(xml))

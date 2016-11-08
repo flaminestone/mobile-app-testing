@@ -36,6 +36,6 @@ module DeviceActions
    # Parse xml interface file
    # @param path [String] is a path to dump file
   def parse_android_xml(path)
-    AndroidParser.parse(path)
+    AndroidParser.parse(path, self.ip)
   end
 end

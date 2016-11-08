@@ -73,6 +73,7 @@ class AdbHelper
       connect(device)
     end
 
+
     # ---------------------------------------------------------------------------------------------
     # Methods for device used
 
@@ -96,6 +97,19 @@ class AdbHelper
       output_file = Tempfile.new(File.basename(path))
       Adb.dump(ip, output_file.path)
       output_file
+    end
+
+    # @param ip [String] is a ip for device
+    def click(ip, coordinats)
+      Adb.click(ip, coordinats.x, coordinats.y)
+    end
+
+    def hide_keybord(ip)
+      Adb.hide_keybord(ip)
+    end
+
+    def input_text(ip, text)
+      Adb.input_text(ip, text)
     end
   end
 end

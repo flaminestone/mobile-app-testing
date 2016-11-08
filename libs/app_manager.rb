@@ -2,6 +2,7 @@ require_relative '../libs/android/android_parser'
 require_relative '../libs/helpers/adb/adb_helper'
 require_relative '../libs/helpers/device/device'
 require_relative '../libs/helpers/device/device_helper'
+require_relative '../libs/helpers/Pages/LoginPageActions'
 require 'json'
 class AppManager
   # method will connect to all devices from configure.json and return array of devices [Device] objects

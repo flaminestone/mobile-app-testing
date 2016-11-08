@@ -45,5 +45,13 @@ class Adb
     def click(ip, x, y)
       `adb -s #{ip} shell input tap #{x} #{y}`
     end
+
+    def input_text(ip, text)
+      `adb -s #{ip} shell input text #{text}`
+    end
+
+    def hide_keybord(ip)
+      `adb -s #{ip} shell input keyevent 111`
+    end
   end
 end
