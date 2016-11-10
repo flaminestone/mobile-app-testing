@@ -5,16 +5,16 @@ class LoginPageActions
     def login(*args)
       login_page = args.first[:login_page]
       AdbHelper.click(login_page.ip, args.first[:login_page].structure.portal_address_field.coordinate.first)
-      AdbHelper.input_text(login_page.ip, args.first[:portal_name] )
       AdbHelper.hide_keybord(login_page.ip)
+      AdbHelper.input_text(login_page.ip, args.first[:portal_name] )
 
       AdbHelper.click(login_page.ip, args.first[:login_page].structure.email_field.coordinate.first)
-      AdbHelper.input_text(login_page.ip, args.first[:email] )
       AdbHelper.hide_keybord(login_page.ip)
+      AdbHelper.input_text(login_page.ip, args.first[:email] )
 
       AdbHelper.click(login_page.ip, args.first[:login_page].structure.password_field.coordinate.first)
-      AdbHelper.input_text(login_page.ip, args.first[:password])
       AdbHelper.hide_keybord(login_page.ip)
+      AdbHelper.input_text(login_page.ip, args.first[:password])
       AdbHelper.click(login_page.ip, args.first[:login_page].structure.login_button.coordinate.first)
       sleep 3
     end
