@@ -53,5 +53,9 @@ class Adb
     def hide_keybord(ip)
       `adb -s #{ip} shell input keyevent 111`
     end
+
+    def delete_app_data(ip, package_name)
+      `adb -s #{ip} shell pm clear #{package_name}`
+    end
   end
 end
