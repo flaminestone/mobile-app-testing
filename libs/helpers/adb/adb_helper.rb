@@ -1,6 +1,7 @@
 # class has methods for use adb utylit. Need to connect android devise for use
 require_relative '../../../libs/helpers/adb/adb'
 require_relative '../../../libs/helpers/device/device'
+require_relative '../../../libs/helpers/device/app_requests'
 require 'tempfile'
 class AdbHelper
   class << self
@@ -110,6 +111,11 @@ class AdbHelper
 
     def input_text(ip, text)
       Adb.input_text(ip, text)
+    end
+
+    def delete_app_data(ip, app_name)
+      package_name = AppRequests::APP[app_name][:package]
+      Adb.delete_app_data(ip, package_name)
     end
   end
 end
