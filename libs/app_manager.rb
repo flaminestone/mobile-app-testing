@@ -2,7 +2,8 @@ require_relative '../libs/android/android_parser'
 require_relative '../libs/helpers/adb/adb_helper'
 require_relative '../libs/helpers/device/device'
 require_relative '../libs/helpers/device/device_helper'
-require_relative '../libs/helpers/Pages/LoginPageActions'
+require_relative '../libs/helpers/FileHelper'
+require_relative '../libs/helpers/LoggerHelper'
 require 'json'
 class AppManager
   # method will connect to all devices from configure.json and return array of devices [Device] objects
@@ -17,5 +18,9 @@ class AppManager
   # disconnect from all devices
   def self.disconnect_all
     AdbHelper.disconnect_all
+    end
+
+  def self.delete_temp_data(ip, app)
+    AdbHelper.delete_app_data(ip, app)
   end
 end

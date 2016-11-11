@@ -1,8 +1,9 @@
+# this is page with filelist. You can see it after login in onlyoffice
 require_relative '../../../libs/android/android_page_structure/android_page/OnlyofficeLoginPage'
 require_relative '../../../libs/helpers/adb/adb_helper'
-class LoginPageActions
+class MainPageActions
   class << self
-    def login(*args)
+    def update(*args)
       login_page = args.first[:login_page]
       AdbHelper.click(login_page.ip, args.first[:login_page].structure.portal_address_field.coordinate.first)
       AdbHelper.hide_keybord(login_page.ip)
