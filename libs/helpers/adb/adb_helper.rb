@@ -105,14 +105,20 @@ class AdbHelper
       Adb.click(ip, coordinats.x, coordinats.y)
     end
 
-    def hide_keybord(ip)
-      Adb.hide_keybord(ip)
+    # @param ip [String] is a ip for device
+    # method will hide keyboard if it visible. Do nothing if keyboard is hided
+    def hide_keyboard(ip)
+      Adb.hide_keyboard(ip)
     end
 
+    # @param ip [String] is a ip for device
+    # @param text [String] is a text for printing
     def input_text(ip, text)
       Adb.input_text(ip, text)
     end
 
+    # @param ip [String] is a ip for device
+    # @param app_name [String] is name of app for data deleting
     def delete_app_data(ip, app_name)
       package_name = AppRequests::APP[app_name][:package]
       Adb.delete_app_data(ip, package_name)
