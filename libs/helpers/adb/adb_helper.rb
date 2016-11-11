@@ -123,5 +123,12 @@ class AdbHelper
       package_name = AppRequests::APP[app_name][:package]
       Adb.delete_app_data(ip, package_name)
     end
+
+    # @param ip [String] is a ip for device
+    # @param coord1 [Coordinates] is start point for swipe
+    # @param coord2 [Coordinates] is finish point for swipe
+    def screen_swipe(ip, coord1, coord2)
+      Adb.screen_swipe(ip, coord1.x, coord1.y, coord2.x, coord2.y)
+    end
   end
 end
