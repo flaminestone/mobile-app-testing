@@ -64,5 +64,9 @@ class Adb
     def screen_swipe(ip, x1, y1, x2, y2)
       `adb -s #{ip} shell input touchscreen swipe #{x1} #{y1} #{x2} #{y2}`
     end
+
+    def set_shell_commands(ip, command)
+      `adb -s #{ip} shell #{command}`
+    end
   end
 end

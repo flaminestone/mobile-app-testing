@@ -108,7 +108,7 @@ class AdbHelper
     # @param ip [String] is a ip for device
     # method will hide keyboard if it visible. Do nothing if keyboard is hided
     def hide_keyboard(ip)
-      Adb.hide_keyboard(ip)
+      Adb.hide_keyboard(ip) if get_keyboard_status(ip)
     end
 
     # @param ip [String] is a ip for device
@@ -129,6 +129,10 @@ class AdbHelper
     # @param coord2 [Coordinates] is finish point for swipe
     def screen_swipe(ip, coord1, coord2)
       Adb.screen_swipe(ip, coord1.x, coord1.y, coord2.x, coord2.y)
+    end
+
+    def get_keyboard_status(ip)
+      Adb.set_shell_commands(ip, 'dumpsys input_method | grep mInputShown').split('mInputShown=').last.strip == "true"
     end
   end
 end
