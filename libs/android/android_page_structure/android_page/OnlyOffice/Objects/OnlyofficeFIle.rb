@@ -1,0 +1,4 @@
+
+class OnlyofficeFile
+
+end
