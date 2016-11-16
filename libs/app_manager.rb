@@ -18,7 +18,7 @@ class AppManager
   # disconnect from all devices
   def self.disconnect_all
     AdbHelper.disconnect_all
-    end
+  end
 
   def self.delete_temp_data(ip, app)
     AdbHelper.delete_app_data(ip, app)
