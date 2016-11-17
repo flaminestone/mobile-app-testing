@@ -3,6 +3,5 @@ require_relative '../../../../../libs/android/android_page_structure/common_pars
 require_relative '../../../../../libs/android/android_page_structure/common_parser/common_data/Element'
 require_relative '../../../../../libs/helpers/adb/adb_helper'
 require_relative '../../../../android/android_page_structure/android_page/OnlyOffice/Objects/OnlyofficeFIle'
-module OnlyofficeMainPage
-
+module OnlyofficeDocumentPage
 end

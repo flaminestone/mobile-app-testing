@@ -29,7 +29,7 @@ class AdbHelper
     # create Device obj. for save serial number and status in one place
     def get_all_devices
       get_devises_id.map do |current_serial|
-        devise = Device.new(:serial_number => current_serial)
+        devise = Device.new(serial_number: current_serial)
         devise.status = get_status(current_serial)
         devise
       end
@@ -46,11 +46,11 @@ class AdbHelper
     def connect(device)
       sleep 0.5
       result = Adb.connect(device.serial_number, device.ip).split(' ').first
-      if result == 'unable'
-        device.status = :offline
-      else
-        device.status = :online
-      end
+      device.status = if result == 'unable'
+                        :offline
+                      else
+                        :online
+                      end
       device
     end
 
@@ -73,7 +73,6 @@ class AdbHelper
       device.ip = ip
       connect(device)
     end
-
 
     # ---------------------------------------------------------------------------------------------
     # Methods for device used
@@ -137,8 +136,8 @@ class AdbHelper
 
     def push_button(ip, key)
       case key
-        when :esc || :escape
-          Adb.push_button(ip, 4)
+      when :esc || :escape
+        Adb.push_button(ip, 4)
       end
     end
 

@@ -6,10 +6,10 @@ module AndroidParser
     def parse(path, ip)
       raise "File #{path} is not found" unless File.exist?(path)
       @ip = ip
-      xmlobj = Nokogiri::XML(open("#{path}.xml"))
-      set_common_data(xmlobj)
-      @page = Page.new(xmlobj)
-      @structure = detect_page(xmlobj)
+      @xmlobj = Nokogiri::XML(open("#{path}.xml"))
+      set_common_data(@xmlobj)
+      @page = Page.new(@xmlobj)
+      detect_page(@xmlobj)
       self
     end
   end
