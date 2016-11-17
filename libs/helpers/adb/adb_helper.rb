@@ -132,7 +132,30 @@ class AdbHelper
     end
 
     def get_keyboard_status(ip)
-      Adb.set_shell_commands(ip, 'dumpsys input_method | grep mInputShown').split('mInputShown=').last.strip == "true"
+      Adb.set_shell_commands(ip, 'dumpsys input_method | grep mInputShown').split('mInputShown=').last.strip == 'true'
+    end
+
+    def push_button(ip, key)
+      case key
+        when :esc || :escape
+          Adb.push_button(ip, 4)
+      end
+    end
+
+    def get_active_windows_data(ip)
+      log = Adb.get_active_windows_data(ip).split('mCurrentFocus=Window{').last.split('}').first
+      result = nil
+      AppRequests::PAGE_ACTIVITY.each_pair do |current_key, current_value|
+        unless log.slice(current_value).nil?
+          result = current_key
+          break
+        end
+      end
+      result
+    end
+
+    def get_screenshot(ip, path)
+      Adb.get_screenshot(ip, path)
     end
   end
 end
