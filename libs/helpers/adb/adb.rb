@@ -46,15 +46,19 @@ class Adb
     end
 
     def click(ip, x, y)
-      `adb -s #{ip} shell input tap #{x} #{y}`
+      `adb -s #{ip} shell input tap #{x} #{y} 2<&1`
     end
 
     def input_text(ip, text)
-      `adb -s #{ip} shell input text #{text}`
+      `adb -s #{ip} shell input text #{text} 2<&1`
+    end
+
+    def push_button(ip, button_key)
+      `adb -s #{ip} shell input keyevent #{button_key} 2<&1`
     end
 
     def hide_keyboard(ip)
-      `adb -s #{ip} shell input keyevent 111`
+      `adb -s #{ip} shell input keyevent 111 2<&1`
     end
 
     def delete_app_data(ip, package_name)
@@ -62,11 +66,20 @@ class Adb
     end
 
     def screen_swipe(ip, x1, y1, x2, y2)
-      `adb -s #{ip} shell input touchscreen swipe #{x1} #{y1} #{x2} #{y2}`
+      `adb -s #{ip} shell input touchscreen swipe #{x1} #{y1} #{x2} #{y2} 2<&1`
     end
 
     def set_shell_commands(ip, command)
-      `adb -s #{ip} shell #{command}`
+      `adb -s #{ip} shell #{command} 2<&1`
+    end
+
+    def get_active_windows_data(ip)
+      `adb -s #{ip} shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp' 2<&1`
+    end
+
+    def get_screenshot(ip, path)
+      `adb -s #{ip} shell screencap -p "/sdcard/screenshot.png"`
+      `adb -s #{ip} pull /sdcard/screenshot.png #{path}`
     end
   end
 end
