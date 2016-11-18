@@ -1,4 +1,4 @@
-{"sony_z1": {"serial_number": "CB5A1YCXQP", "ip": "172.50.0.16:5555", "user_name": 'sony_z1_teamlab@gmail.com', "pwd": '123456'},
-  "nvidia_shild": {"serial_number": "0420116800426005fa64", "ip": "172.50.0.3:5555", "user_name": 'nvidia_shild_teamlab@gmail.com', "pwd": '123456'},
-  "samsung_s4W": {"serial_number": "4d00d00ab1ec3083", "ip": "172.50.0.47:5555", "user_name": 'samsung_s4W_teamlab@gmail.com', "pwd": '123456'},
-  "samsung_tab_s2": {"serial_number": "3300f241f9aca2fb", "ip": "172.50.0.214:5555", "user_name": 'samsung_tab_s2_teamlab@gmail.com', "pwd": '123456'}}
+{"sony_z1": {"serial_number": "CB5A1YCXQP", "ip": "172.50.0.16:5555", "user_name": "sony_z1_teamlab@gmail.com", "pwd": "123456"},
+  "nvidia_shild": {"serial_number": "0420116800426005fa64", "ip": "172.50.0.3:5555", "user_name": "nvidia_shild_teamlab@gmail.com", "pwd": "123456"},
+  "samsung_s4W": {"serial_number": "4d00d00ab1ec3083", "ip": "172.50.0.47:5555", "user_name": "samsung_s4W_teamlab@gmail.com", "pwd": "123456"},
+  "samsung_tab_s2": {"serial_number": "3300f241f9aca2fb", "ip": "172.50.0.214:5555", "user_name": "samsung_tab_s2_teamlab@gmail.com", "pwd": "123456"}}
