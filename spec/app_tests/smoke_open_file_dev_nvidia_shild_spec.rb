@@ -4,17 +4,17 @@ require_relative '../../libs/app_manager'
 
 current_device = nil
 main_page = nil
-describe 'open application tests' do
+describe 'open files' do
   before :all do
-    current_device = AppManager.initial_devices_by_config[1]
+    current_device = AppManager.initial_device('nvidia_shild')
+    user_data = AppManager.get_user_data('nvidia_shild')
     AppManager.delete_temp_data(current_device.ip, :onlyoffice)
-
     login_page = current_device.run_app(:onlyoffice)
-    main_page = login_page.login(:portal_name => 'mobile-test.teamlab.info', :email => 'john.dorian@tm-runner.no-ip.org', :password => '123456')
+    main_page = login_page.login(:portal_name => 'mobile-test.teamlab.info', :email => user_data['user_name'], :password => user_data['pwd'])
     OnlyOfficeApi.configure do |config|
       config.server = 'https://mobile-test.teamlab.info'
-      config.username = 'john.dorian@tm-runner.no-ip.org'
-      config.password = '123456'
+      config.username = user_data['user_name']
+      config.password = user_data['pwd']
     end
   end
 
