@@ -130,10 +130,17 @@ class AdbHelper
       Adb.screen_swipe(ip, coord1.x, coord1.y, coord2.x, coord2.y)
     end
 
+    # @param ip [String] is a ip for device
+    # this method will check keyboard status. Return true is it is open, false if it hidden
     def get_keyboard_status(ip)
       Adb.set_shell_commands(ip, 'dumpsys input_method | grep mInputShown').split('mInputShown=').last.strip == 'true'
     end
 
+    # @param ip [String] is a ip for device
+    # @param key [Symbol] is a name of key for pushing.
+    # this method will check keyboard status. Return true is it is open, false if it hidden
+    # Active button for used:
+    # :escape || :esc
     def push_button(ip, key)
       case key
       when :esc || :escape
@@ -141,6 +148,8 @@ class AdbHelper
       end
     end
 
+    # @param ip [String] is a ip for device
+    # get current window data. Return activity name. All names you can see in it AppRequests::PAGE_ACTIVITY
     def get_active_windows_data(ip)
       log = Adb.get_active_windows_data(ip).split('mCurrentFocus=Window{').last.split('}').first
       result = nil
@@ -153,6 +162,8 @@ class AdbHelper
       result
     end
 
+    # @param ip [String] is a ip for device
+    # @param path [String] is a path for file save
     def get_screenshot(ip, path)
       Adb.get_screenshot(ip, path)
     end
