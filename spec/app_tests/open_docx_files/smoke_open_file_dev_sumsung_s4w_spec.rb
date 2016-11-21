@@ -1,8 +1,8 @@
 require 'rspec'
 require 'onlyoffice_api'
-require_relative '../../libs/app_manager'
+require_relative '../../../libs/app_manager'
 
-current_device = 'meizu_stas'
+current_device = 'samsung_s4W'
 main_page = nil
 folder_name = nil
 describe 'open files' do
@@ -12,9 +12,9 @@ describe 'open files' do
     AppManager.delete_temp_data(current_device.ip, :onlyoffice)
     folder_name = AppManager.create_scr_result_folder(current_device.name)
     login_page = current_device.run_app(:onlyoffice)
-    main_page = login_page.login(:portal_name => 'mobile-test.teamlab.info', :email => user_data['user_name'], :password => user_data['pwd'])
+    main_page = login_page.login(:portal_name => PortalData::PORTAL_NAME, :email => user_data['user_name'], :password => user_data['pwd'])
     OnlyOfficeApi.configure do |config|
-      config.server = 'https://mobile-test.teamlab.info'
+      config.server = PortalData::FULL_PORTAL_NAME
       config.username = user_data['user_name']
       config.password = user_data['pwd']
     end
@@ -26,8 +26,8 @@ describe 'open files' do
       OnlyOfficeApi.files.upload_to_my_docs(filepath)
       main_page = main_page.update_file_list
       file_result = main_page.open_file_by_name(File.basename(filepath))
-      File.open('table.txt', 'w'){ |file| file.write "base filename, last_filename \\n" }
-
+      File.open('table.txt', 'w'){ |file| file.write "base filename, last_filename \n" }
+      File.open('table.txt', 'a'){ |file| file.write "\n" }
       last_filename = Time.now.nsec
       create_file_table(filepath, last_filename, folder_name)
       AdbHelper.get_screenshot(current_device.ip, "#{folder_name}/#{last_filename}.png")
@@ -36,7 +36,7 @@ describe 'open files' do
   end
 
   def create_file_table(base_filename, filename, folder_name)
-    File.open(folder_name + '/table.txt', 'a'){ |file| file.write "#{base_filename}, #{filename}" }
+    File.open(folder_name + '/table.txt', 'a'){ |file| file.write "#{base_filename}, #{filename} \n" }
   end
 
   after :each do
@@ -47,7 +47,6 @@ describe 'open files' do
   end
 
   after :all do
-    AppManager.disconnect_all
     AppManager.delete_temp_data(current_device.ip, :onlyoffice)
   end
 end
