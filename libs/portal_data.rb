@@ -1,7 +1,5 @@
-
+# class with data for portal
 class PortalData
-  PORTAL_NAME = 'mobile-test.teamlab.info'
-  FULL_PORTAL_NAME = 'https://mobile-test.teamlab.info'
-
-
+  PORTAL_NAME = '192.168.3.38'
+  FULL_PORTAL_NAME = 'http://192.168.3.38'
 end
