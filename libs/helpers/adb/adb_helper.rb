@@ -3,6 +3,7 @@ require_relative '../../../libs/helpers/adb/adb'
 require_relative '../../../libs/helpers/device/device'
 require_relative '../../../libs/helpers/device/app_requests'
 require 'tempfile'
+require 'onlyoffice_logger_helper/logger_helper'
 class AdbHelper
   class << self
     # get serial number  for all devices
@@ -38,7 +39,9 @@ class AdbHelper
     # get ip address by device
     # @param device [Device] is a object os Device class
     def get_wifi_ip(device)
-      Adb.get_wlan_data(device.serial_number)[/(inet )[0-9.]+/].delete('inet ')
+      ip = Adb.get_wlan_data(device.serial_number)[/(inet )[0-9.]+/].delete('inet ')
+      OnlyofficeLoggerHelper.log("Current wifi ip: #{ip}")
+      ip
     end
 
     # Connect adb to device by wifi(shell method)
@@ -101,24 +104,32 @@ class AdbHelper
 
     # @param ip [String] is a ip for device
     def click(ip, coordinats)
+      OnlyofficeLoggerHelper.log("Click by coordinate x:#{coordinats.x} y:#{coordinats.y}")
       Adb.click(ip, coordinats.x, coordinats.y)
     end
 
     # @param ip [String] is a ip for device
     # method will hide keyboard if it visible. Do nothing if keyboard is hided
     def hide_keyboard(ip)
-      Adb.hide_keyboard(ip) if get_keyboard_status(ip)
+       if get_keyboard_status(ip)
+         OnlyofficeLoggerHelper.log("Hide_keyboard")
+         Adb.hide_keyboard(ip)
+         return
+       end
+       OnlyofficeLoggerHelper.log("Not hide_keyboard")
     end
 
     # @param ip [String] is a ip for device
     # @param text [String] is a text for printing
     def input_text(ip, text)
+      OnlyofficeLoggerHelper.log("Print text: #{text}")
       Adb.input_text(ip, text)
     end
 
     # @param ip [String] is a ip for device
     # @param app_name [String] is name of app for data deleting
     def delete_app_data(ip, app_name)
+      OnlyofficeLoggerHelper.log("Delete app data")
       package_name = AppRequests::APP[app_name][:package]
       Adb.delete_app_data(ip, package_name)
     end
@@ -127,13 +138,16 @@ class AdbHelper
     # @param coord1 [Coordinates] is start point for swipe
     # @param coord2 [Coordinates] is finish point for swipe
     def screen_swipe(ip, coord1, coord2)
+      OnlyofficeLoggerHelper.log("Delete app data")
       Adb.screen_swipe(ip, coord1.x, coord1.y, coord2.x, coord2.y)
     end
 
     # @param ip [String] is a ip for device
     # this method will check keyboard status. Return true is it is open, false if it hidden
     def get_keyboard_status(ip)
-      Adb.set_shell_commands(ip, 'dumpsys input_method | grep mInputShown').split('mInputShown=').last.strip == 'true'
+      status = Adb.set_shell_commands(ip, 'dumpsys input_method | grep mInputShown').split('mInputShown=').last.strip == 'true'
+      OnlyofficeLoggerHelper.log("Current keyboard status: #{status}")
+      status
     end
 
     # @param ip [String] is a ip for device
@@ -143,8 +157,9 @@ class AdbHelper
     # :escape || :esc
     def push_button(ip, key)
       case key
-      when :esc || :escape
-        Adb.push_button(ip, 4)
+        when :esc || :escape
+          OnlyofficeLoggerHelper.log("Press escape")
+          Adb.push_button(ip, 4)
       end
     end
 
@@ -165,6 +180,7 @@ class AdbHelper
     # @param ip [String] is a ip for device
     # @param path [String] is a path for file save
     def get_screenshot(ip, path)
+      OnlyofficeLoggerHelper.log("Get screenshot")
       Adb.get_screenshot(ip, path)
     end
   end
