@@ -30,5 +30,29 @@
       "pwd": "123456",
       "user_name": "sony_z1_teamlab@gmail.com"
     }
+  },
+  "meizu_stas": {
+    "ip": "172.50.0.4:5555",
+    "serial_number": "81UEBMC28HRM",
+    "user_data": {
+      "pwd": "123456",
+      "user_name": "meizu_stas_teamlab@gmail.com"
+    }
+  },
+  "meizu_pasha": {
+    "ip": "172.50.0.17:5555",
+    "serial_number": "81UEBMC28HRM",
+    "user_data": {
+      "pwd": "123456",
+      "user_name": "meizu_pasha_teamlab@gmail.com"
+    }
+  },
+  "pixel": {
+    "ip": "172.50.0.17:5555",
+    "serial_number": "81UEBMC28HRM",
+    "user_data": {
+      "pwd": "123456",
+      "user_name": "meizu_pasha_teamlab@gmail.com"
+    }
   }
 }
