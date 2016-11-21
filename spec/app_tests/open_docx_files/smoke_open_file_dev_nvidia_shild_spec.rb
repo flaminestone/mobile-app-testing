@@ -26,8 +26,8 @@ describe 'open files' do
       OnlyOfficeApi.files.upload_to_my_docs(filepath)
       main_page = main_page.update_file_list
       file_result = main_page.open_file_by_name(File.basename(filepath))
-      File.open('table.txt', 'w'){ |file| file.write "base filename, last_filename \n" }
-      File.open('table.txt', 'a'){ |file| file.write "\n" }
+      File.open(folder_name + '/table.txt', 'w'){ |file| file.write "base filename, last_filename \n" }
+      File.open(folder_name + '/table.txt', 'a'){ |file| file.write "\n" }
       last_filename = Time.now.nsec
       create_file_table(filepath, last_filename, folder_name)
       AdbHelper.get_screenshot(current_device.ip, "#{folder_name}/#{last_filename}.png")
