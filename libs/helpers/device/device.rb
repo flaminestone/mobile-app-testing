@@ -3,7 +3,7 @@ require_relative '../../../libs/helpers/adb/adb_helper'
 require_relative '../../../libs/helpers/device/device_actions'
 class Device
   include DeviceActions
-  attr_accessor :serial_number, :status, :name, :ip
+  attr_accessor :serial_number, :status, :name, :ip, :user_data
 
   def initialize(*args)
     @serial_number = args.first[:serial_number]
