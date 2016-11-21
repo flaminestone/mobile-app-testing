@@ -1,6 +1,6 @@
 require 'rspec'
 require 'onlyoffice_api'
-require_relative '../../libs/app_manager'
+require_relative '../../../libs/app_manager'
 
 current_device = 'nvidia_shild'
 main_page = nil
