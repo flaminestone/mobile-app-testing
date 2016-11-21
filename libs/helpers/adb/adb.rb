@@ -1,85 +1,128 @@
 # class has methods for use adb utilit. Need to connect android devise for use
+require 'onlyoffice_logger_helper'
 class Adb
   class << self
+    # get
     def get_devises
-      `adb devices 2<&1`
+      command = 'adb devices 2<&1'
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def get_state(id)
-      `adb -s #{id} get-state 2<&1`
+      command = "adb -s #{id} get-state 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def get_wlan_data(id)
-      `adb -s #{id} shell ip -f inet addr show wlan0 2<&1`
+      command = "adb -s #{id} shell ip -f inet addr show wlan0 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def connect(id, ip)
-      `adb -s #{id} connect #{ip} 2<&1`
+      command = "adb -s #{id} connect #{ip} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def disconnect(id)
-      `adb disconnect #{id} 2<&1`
+      command = "adb disconnect #{id} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def disconnect_all
-      `adb disconnect 2<&1`
+      command = "adb disconnect 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def set_port(id, port = '5555')
-      `adb -s #{id} tcpip #{port} 2<&1`
+      command = "adb -s #{id} tcpip #{port} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      OnlyofficeLoggerHelper.print_to_log("Sleep 3 for reboot tcp")
       sleep 3 # need to reboot tcp
+      `#{command}`
     end
 
     def shell_start_by_ip(ip, command, key = 'a')
       if command == 'com.onlyoffice.documents/.activities.MainActivity'
           command = '"com.onlyoffice.documents/com.onlyoffice.documents.activities.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER'
       end
-      `adb -s #{ip} shell am start -#{key} #{command} 2<&1`
+      command_for_run = "adb -s #{ip} shell am start -#{key} #{command} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command_for_run}")
+      `#{command}`
     end
 
     def pull(ip, pull_from, pull_to)
-      `adb -s #{ip} pull #{pull_from} #{pull_to} 2<&1`
+      command = "adb -s #{ip} pull #{pull_from} #{pull_to} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def dump(ip, save_to)
-    `adb -s #{ip} pull $(adb -s #{ip}  shell uiautomator dump | grep -oP '[^ ]+.xml') #{save_to}.xml 2<&1`
+      command = "adb -s #{ip} pull $(adb -s #{ip}  shell uiautomator dump | grep -oP '[^ ]+.xml') #{save_to}.xml 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def click(ip, x, y)
-      `adb -s #{ip} shell input tap #{x} #{y} 2<&1`
+      command = "adb -s #{ip} shell input tap #{x} #{y} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def input_text(ip, text)
-      `adb -s #{ip} shell input text #{text} 2<&1`
+      command = "adb -s #{ip} shell input text #{text} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def push_button(ip, button_key)
-      `adb -s #{ip} shell input keyevent #{button_key} 2<&1`
+      command = "adb -s #{ip} shell input keyevent #{button_key} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def hide_keyboard(ip)
-      `adb -s #{ip} shell input keyevent 111 2<&1`
+      command = "adb -s #{ip} shell input keyevent 111 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def delete_app_data(ip, package_name)
-      `adb -s #{ip} shell pm clear #{package_name}`
+      command = "adb -s #{ip} shell pm clear #{package_name}"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def screen_swipe(ip, x1, y1, x2, y2)
-      `adb -s #{ip} shell input touchscreen swipe #{x1} #{y1} #{x2} #{y2} 2<&1`
+      command = "adb -s #{ip} shell input touchscreen swipe #{x1} #{y1} #{x2} #{y2} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def set_shell_commands(ip, command)
-      `adb -s #{ip} shell #{command} 2<&1`
+      command = "adb -s #{ip} shell #{command} 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def get_active_windows_data(ip)
-      `adb -s #{ip} shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp' 2<&1`
+      command = "adb -s #{ip} shell dumpsys window windows | grep -E 'mCurrentFocus|mFocusedApp' 2<&1"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
 
     def get_screenshot(ip, path)
-      `adb -s #{ip} shell screencap -p "/sdcard/screenshot.png"`
-      `adb -s #{ip} pull /sdcard/screenshot.png #{path}`
+      command = "adb -s #{ip} shell screencap -p \"/sdcard/screenshot.png\""
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
+      command = "adb -s #{ip} pull /sdcard/screenshot.png #{path}"
+      OnlyofficeLoggerHelper.print_to_log("Run adb command #{command}")
+      `#{command}`
     end
   end
 end
