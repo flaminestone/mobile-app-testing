@@ -42,8 +42,9 @@ class Adb
       command = "adb -s #{id} tcpip #{port} 2<&1"
       OnlyofficeLoggerHelper.log("Run adb command #{command}", 33)
       OnlyofficeLoggerHelper.log("Sleep 3 for reboot tcp", 33)
+      result = `#{command}`
       sleep 3 # need to reboot tcp
-      `#{command}`
+      result
     end
 
     def shell_start_by_ip(ip, command, key = 'a')
