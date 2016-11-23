@@ -54,5 +54,13 @@
       "pwd": "123456",
       "user_name": "meizu_pasha_teamlab@gmail.com"
     }
+  },
+  "lenovo-k1": {
+    "ip": "172.50.0.205:5555",
+    "serial_number": "none",
+    "user_data": {
+      "pwd": "123456",
+      "user_name": "lenovo-k1_teamlab@gmail.com"
+    }
   }
 }
