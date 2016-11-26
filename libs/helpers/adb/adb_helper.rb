@@ -16,14 +16,14 @@ class AdbHelper
     # return :offline (cant find device), :loading (device is booting) or :online (ready to work)
     def get_status(id)
       case Adb.get_state(id).chomp
-      when 'offline'
-        :offline
-      when 'bootloader'
-        :loading
-      when 'device'
-        :online
-      else
-        :none
+        when 'offline'
+          :offline
+        when 'bootloader'
+          :loading
+        when 'device'
+          :online
+        else
+          :none
       end
     end
 
@@ -111,12 +111,12 @@ class AdbHelper
     # @param ip [String] is a ip for device
     # method will hide keyboard if it visible. Do nothing if keyboard is hided
     def hide_keyboard(ip)
-       if get_keyboard_status(ip)
-         OnlyofficeLoggerHelper.log("Hide_keyboard")
-         Adb.hide_keyboard(ip)
-         return
-       end
-       OnlyofficeLoggerHelper.log("Not hide_keyboard")
+      if get_keyboard_status(ip)
+        OnlyofficeLoggerHelper.log("Hide_keyboard")
+        Adb.hide_keyboard(ip)
+        return
+      end
+      OnlyofficeLoggerHelper.log("Not hide_keyboard")
     end
 
     # @param ip [String] is a ip for device
@@ -164,15 +164,18 @@ class AdbHelper
     end
 
     # @param ip [String] is a ip for device
-    # get current window data. Return activity name. All names you can see in it AppRequests::PAGE_ACTIVITY
+    # get current window data. Return activity name. All names you can see in it AppRequests::ONLYOFFICE_PAGES_ACTIVITY or other
     def get_active_windows_data(ip)
-      log = Adb.get_active_windows_data(ip).split('mCurrentFocus=Window{').last.split('}').first
+      log = Adb.get_active_windows_data(ip)
+      unless log == ''
+        log = log.split('mCurrentFocus=Window{').last.split('}').first
       result = nil
-      AppRequests::PAGE_ACTIVITY.each_pair do |current_key, current_value|
+      AppRequests::ONLYOFFICE_PAGES_ACTIVITY.each_pair do |current_key, current_value|
         unless log.slice(current_value).nil?
           result = current_key
           break
         end
+      end
       end
       result
     end
