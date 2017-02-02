@@ -155,11 +155,15 @@ class AdbHelper
     # this method will check keyboard status. Return true is it is open, false if it hidden
     # Active button for used:
     # :escape || :esc
+    # :enter
     def push_button(ip, key)
       case key
         when :esc || :escape
           OnlyofficeLoggerHelper.log("Press escape")
           Adb.push_button(ip, 4)
+        when :enter
+          OnlyofficeLoggerHelper.log("Press enter")
+          Adb.push_button(ip, 66)
       end
     end
 

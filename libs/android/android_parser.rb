@@ -2,7 +2,7 @@ require_relative '../../libs/android/android_page_structure/common_parser/common
 require_relative '../../libs/android/android_page_structure/Page'
 module AndroidParser
   class AndroidPageStructure < AndroidPageObject
-    attr_accessor :ip, :page, :structure
+    attr_accessor :ip, :page, :structure, :xmlobj
     def parse(path, ip = nil)
       raise "File #{path} is not found" unless File.exist?(path)
       @ip = ip

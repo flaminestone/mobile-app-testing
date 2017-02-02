@@ -5,6 +5,7 @@ require_relative '../../../../../libs/android/android_page_structure/android_pag
 require_relative '../../../../../libs/helpers/device/device_actions'
 require_relative '../../../../../libs/android/android_page_structure/android_page/OnlyOffice/OnlyofficeMainPage'
 require_relative '../../../../../libs/android/android_page_structure/android_page/OnlyOffice/OnlyofficeDocumentPage'
+require_relative '../../../../../libs/android/android_page_structure/android_page/GoogleChrome/GoogleChromeMainPage'
 class AndroidPageObject
   include DeviceActions
   attr_accessor :elem_class, :elem_package, :checkable, :enabled, :coordinats
@@ -31,6 +32,12 @@ class AndroidPageObject
     unless xml.to_s.slice('com.onlyoffice.documents:id/container').nil?
       OnlyofficeLoggerHelper.log("Main page detected")
       extend OnlyofficeMainPage
+      OnlyofficeLoggerHelper.log("Module was extend")
+      sleep 1
+    end
+    unless xml.to_s.slice('com.android.chrome').nil?
+      OnlyofficeLoggerHelper.log("Main page detected: GoogleChrome")
+      extend GoogleChromeMainPage
       OnlyofficeLoggerHelper.log("Module was extend")
       sleep 1
     end
