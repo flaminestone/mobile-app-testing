@@ -2,14 +2,22 @@ require_relative '../../../libs/helpers/adb/adb_helper'
 require_relative '../../../libs/helpers/device/app_requests'
 module DeviceActions
 
-  # @params app_name [Symbol].
+  # @params app_name [Symbol]
   # there are list of valit application name:
   # :google_play
   # :onlyoffice
    def run_app(app_name)
      AdbHelper.run_command_on_device(@ip, AppRequests::APP[app_name][:command], 'n')
      sleep 5 # no app to open it moment, need to sleep
-     get_dump('install_app_from_google_play')
+     wait_for_app_is_runing(app_name)
+     get_dump('app_dump')
+   end
+
+   def wait_for_app_is_runing(waiting_page_activity, timeout = 5)
+     timeout.times do
+       break if AppRequests::ONLYOFFICE_PAGES_ACTIVITY.keys.include? AdbHelper.get_active_windows_data(@ip)
+       sleep 5
+     end
    end
 
    # @param link [String] is a link to application in google play market

@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'onlyoffice_logger_helper/logger_helper'
 require_relative '../../../../../libs/android/android_page_structure/common_parser/common_data/Coordinates'
 require_relative '../../../../../libs/android/android_page_structure/android_page/OnlyOffice/OnlyofficeLoginPage'
 require_relative '../../../../../libs/helpers/device/device_actions'
@@ -21,7 +22,17 @@ class AndroidPageObject
 
   # This method will detect page by main elements.
   def detect_page(xml)
-    extend OnlyofficeLoginPage unless xml.to_s.slice('com.onlyoffice.documents:id/login_form').nil?
-    extend OnlyofficeMainPage unless xml.to_s.slice('com.onlyoffice.documents:id/container').nil?
+    OnlyofficeLoggerHelper.log("Detecting page:")
+     unless xml.to_s.slice('com.onlyoffice.documents:id/login_form').nil?
+       OnlyofficeLoggerHelper.log("Login page detected")
+       extend OnlyofficeLoginPage
+       OnlyofficeLoggerHelper.log("Module was extend")
+     end
+    unless xml.to_s.slice('com.onlyoffice.documents:id/container').nil?
+      OnlyofficeLoggerHelper.log("Main page detected")
+      extend OnlyofficeMainPage
+      OnlyofficeLoggerHelper.log("Module was extend")
+      sleep 1
+    end
   end
 end
