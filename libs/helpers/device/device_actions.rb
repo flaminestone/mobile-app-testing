@@ -10,10 +10,12 @@ module DeviceActions
      AdbHelper.run_command_on_device(@ip, AppRequests::APP[app_name][:command], 'n')
      sleep 5 # no app to open it moment, need to sleep
      wait_for_app_is_runing(app_name)
-     google_chrome = get_dump('app_dump')
-     google_chrome.next_on_welcome_page
-     google_chrome = get_dump('app_dump')
-     google_chrome.close_welcome_page
+     if app_name == :google_chrome
+       google_chrome = get_dump('app_dump')
+       google_chrome.next_on_welcome_page
+       google_chrome = get_dump('app_dump')
+       google_chrome.close_welcome_page
+     end
      get_dump('app_dump')
    end
 
